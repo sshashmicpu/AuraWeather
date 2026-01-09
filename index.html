@@ -312,42 +312,31 @@
         }
 
         function playAuraReport() {
-    if(!weatherCache) {
-        alert("Pehle weather data load hone dein.");
-        return;
-    }
-    
-    // Variables ko sahi tareeqe se fetch karna
-    const cur = weatherCache.current;
-    const daily = weatherCache.daily;
-    const loc = document.getElementById('loc-name').innerText;
-    const sunrise = document.getElementById('sunrise').innerText;
-    const sunset = document.getElementById('sunset').innerText;
+            if(!weatherCache) return;
+            const cur = weatherCache.current;
+            const daily = weatherCache.daily;
+            const loc = document.getElementById('loc-name').innerText;
+            const sunrise = document.getElementById('sunrise').innerText;
+            const sunset = document.getElementById('sunset').innerText;
 
-    // Aapka Urdu Script
-    const report = `
-        Salaam, Aura Weather Report baraaye ${loc}. 
-        Aaj sooraj tuloo hone ka waqt subha ${sunrise} aur ghuroob hone ka waqt shaam ${sunset} hai.
-        Is waqt temperature yani darja haraarat taqreeban ${Math.round(cur.temperature_2m)} degree Celsius hai, jo ke ${Math.round(cur.apparent_temperature)} degree mehsoos ho raha hai. 
-        Hawa mein nami ki miqdaar ${cur.relative_humidity_2m} feesad hai. 
-        Aasmaan par baadal ${cur.cloud_cover} feesad hain aur dhoop ki shiddat yani UV Index ${cur.uv_index.toFixed(1)} hai. 
-        Fizaaee safaai aur hawa k meyaar ki baat karein to Air Quality Index is waqt ${aqiCache} record kiya gaya hai. 
-        Aane wale chobees ghantoon mein baarish ka imkaan ${daily.precipitation_probability_max[0]} feesad hai. 
-        Brief report tamaam hui, Aura weather-Designed by SS HASHMI. Stay aware stay safe, aur apna khayal rakhein!
-    `;
+            const report = `
+                Salaam, Aura Weather Report baraaye ${loc}. 
+                Aaj sooraj tuloo hone ka waqt subha ${sunrise} aur ghuroob hone ka waqt shaam ${sunset} hai.
+                Is waqt temperature yani darja haraarat taqreeban ${Math.round(cur.temperature_2m)} degree Celsius hai, jo ke ${Math.round(cur.apparent_temperature)} degree mehsoos ho raha hai. 
+                Hawa mein nami ki miqdaar ${cur.relative_humidity_2m} feesad hai. 
+                Aasmaan par baadal ${cur.cloud_cover} feesad hain aur dhoop ki shiddat yani UV Index ${cur.uv_index.toFixed(1)} hai. 
+                Fizaaee safaai aur hawa k meyaar ki baat karein to Air Quality Index is waqt ${aqiCache} record kiya gaya hai. 
+                Aane wale chobees ghantoon mein baarish ka imkaan ${daily.precipitation_probability_max[0]} feesad hai. 
+                Brief report tamaam hui, Aura weather-Designed by SS HASHMI. Stay aware stay safe, aur apna khayal rakhein!
+            `;
 
-    // Speech System ko activate karna
-    window.speechSynthesis.cancel(); // Purani awaaz band karne ke liye
-    const speech = new SpeechSynthesisUtterance(report);
-    
-    // Language check: hi-IN ya en-US (Urdu accent ke liye hi-IN best hai)
-    speech.lang = 'hi-IN'; 
-    speech.rate = 0.85; // Thora ahista taake samajh aaye
-    speech.volume = 1.0;
+            window.speechSynthesis.cancel();
+            const speech = new SpeechSynthesisUtterance(report);
+            speech.lang = 'hi-IN'; // Works best for Urdu/Hindi accent
+            speech.rate = 0.85;
+            window.speechSynthesis.speak(speech);
+        }
 
-    window.speechSynthesis.speak(speech);
-}
-            
         function saveFavorite() {
             const city = document.getElementById('city-input').value;
             if(city) { localStorage.setItem('favCity', city); alert("Saved " + city); }
