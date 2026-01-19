@@ -1,4 +1,4 @@
-const cacheName = 'aura-weather'; // Version change
+const cacheName = 'aura-weather'v1; // Version change
 const assets = [
   'index.html',
   'icon.png',
