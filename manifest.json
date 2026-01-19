@@ -1,0 +1,25 @@
+{
+  "name": "AURA WEATHER by HashTech",
+  "short_name": "Aura Weather",
+  "description": "Weather data simplified by HashTech.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00f3ff",
+  "orientation": "any",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
